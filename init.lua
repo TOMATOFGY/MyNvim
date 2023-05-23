@@ -1,64 +1,94 @@
+-- 在 vscode 下,自动退出
+if vim.g.vscode then
+	return
+end
+
 require "user.options"
 require "user.keymaps"
 require "user.bootstrap"
+require "user.functions"
+require "user.plugins"
 
 require("lazy").setup({
-	{
-		"folke/which-key.nvim",
-	    config = function()
-    	  	vim.o.timeout = true
-      		vim.o.timeoutlen = 30 -- 设置了一个充分小的数,使得能够立即相应
-     		require("which-key").setup({
+  {
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 30   -- 设置了一个充分小的数,使得能够立即相应
+      require("which-key").setup({
         -- your configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
-		--
-    		})
-    	end,
-	},
+        --
+      })
+    end,
+  },
 
-  { "folke/neoconf.nvim", cmd = "Neoconf" },
+  { "folke/neoconf.nvim",      cmd = "Neoconf" },
   "folke/neodev.nvim",
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate" -- :MasonUpdate updates registry contents
-	},
-    {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
-      dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+  {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.1',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+  {
+    "kelly-lin/ranger.nvim",
+    config = function()
+      require("ranger-nvim").setup({ replace_netrw = true })
+      vim.api.nvim_set_keymap("n", "<leader>r", "", {
+        noremap = true,
+        callback = function()
+          require("ranger-nvim").open(true)
+        end,
+      })
+      vim.api.nvim_set_keymap("n", "<leader>e", "", {
+        noremap = true,
+        callback = function()
+          require("ranger-nvim").open(true)
+        end,
+      })
+    end,
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
     },
-	{
-  "kelly-lin/ranger.nvim",
-  config = function()
-    require("ranger-nvim").setup({ replace_netrw = true })
-    vim.api.nvim_set_keymap("n", "<leader>r", "", {
-      noremap = true,
-      callback = function()
-        require("ranger-nvim").open(true)
-      end,
-    })
-  end,
-},
-{
-  "nvim-tree/nvim-tree.lua",
-  version = "*",
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("nvim-tree").setup {
+        -- config for nvim-tree
+        sort_by = "case_sensitive",
+        view = {
+          width = 30,
+        },
+        renderer = {
+          group_empty = true,
+        },
+      }
+    end,
   },
-  config = function()
-    require("nvim-tree").setup {
-	-- config for nvim-tree
-	sort_by = "case_sensitive",
-  view = {
-    width = 30,
+  {
+    'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim',     -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {
+      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+      -- animation = true,
+      -- insert_at_start = true,
+      -- …etc.
+    },
+    version = '^1.0.0', -- optional: only update when a new 1.x version is released
   },
-  renderer = {
-    group_empty = true,
-  },
-	}
-  end,
-}
 
+  { 'akinsho/toggleterm.nvim', version = "*",  opts = { --[[ things you want to change go here]] } }
 })
 
 -- 启动 mason

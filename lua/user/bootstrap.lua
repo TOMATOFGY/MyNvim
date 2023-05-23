@@ -1,5 +1,4 @@
-
-local lazypath = "./data/lazy/lazy.nvim"
+local lazypath = "/Users/tomatofaq/.config/nvim/data/lazy/lazy.nvim"
 -- 如果没找到该文件，说明是第一次加载本配置文件，首先gitclone lazyvim
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -12,5 +11,3 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-
-
