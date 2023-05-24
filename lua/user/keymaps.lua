@@ -29,7 +29,7 @@ keymap("n","<Leader>x",":bdelete<CR>",opts)
 keymap("n","<Leader>tt",":terminal<CR>A",opts)
 keymap("t","<Esc>","<C-\\><C-n>",opts)
 
--- 补充一个在 terminal 情况下也能进行呼出 whichkey 的功能,然后可以根据这个进行退出操作
+-- ⭕️ TODO 补充一个在 terminal 情况下也能进行呼出 whichkey 的功能,然后可以根据这个进行退出操作
 -- keymap("t","<Leader>","<C-\\><C-n> :lua WhichKey<CR>",opts)
 -- keymap("t","<Leader><Leader>",vim.cmd('execute "normal! i' .. ' ' .. '"'),opts)
 -- TODO 补充一个在非输入情况下,输入:q\:x等直接退出的功能
