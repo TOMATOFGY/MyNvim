@@ -37,6 +37,11 @@ keymap.set("n","<Leader>de",":NvimTreeClose<CR>",opts)
 keymap.set("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap.set("x", "K", ":move '<-2<CR>gv-gv", opts)
 
+keymap.set("t","<C-k>","<C-w><C-k>",opts);
+keymap.set("t","<C-j>","<C-w><C-j>",opts);
+keymap.set("t","<C-J>","<C-W><C-J>",opts);
+keymap.set("t","<C-J>","<C-W><C-J>",opts);
+
 -- 覆盖,将 Leader-r 映射到打开 ranger
 vim.keymap.set("n", "<leader>rr", "", {
         noremap = true,
@@ -74,3 +79,6 @@ vim.keymap.set('n', '<leader>gg', ":LazyGit<CR>", {})
 -- 定义一个user defined 的 cmd
 -- 输入":Q"将执行":q"
 vim.cmd("command! Q q")
+vim.cmd("command! W w")
+vim.cmd("command! Wq wq")
+vim.cmd("command! WQ wq")
