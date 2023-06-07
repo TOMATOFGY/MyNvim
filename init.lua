@@ -24,18 +24,21 @@ function command(cmd)
 end
 
 
-local function getCurrentScriptFolderPath()
+function getCurrentScriptFolderPath()
   local info = debug.getinfo(1, "S")
   local path = info.source:sub(2) -- 去掉路径前面的 '@' 字符
   return string.match(path, "(.*/)") or "./"
 end
 
+-- 获取当前配置文件所在路径
 repository_path = getCurrentScriptFolderPath()
 
 print(repository_path)
 
+-- lazy.vim 所在路径
 lazypath = repository_path .. "lazy/lazy.vim"
 
+-- TODO 将 lazynvim 的下载路径设置为当前 config 所在的路径
 -- bootstrap lazy.nvim!
 if not vim.loop.fs_stat(lazypath) then
   require("core.bootstrap").gen_chadrc_template()
