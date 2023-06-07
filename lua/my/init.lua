@@ -82,3 +82,20 @@ vim.cmd("command! Q q")
 vim.cmd("command! W w")
 vim.cmd("command! Wq wq")
 vim.cmd("command! WQ wq")
+
+
+local cache_dir = vim.fn.stdpath("cache")
+print (cache_dir)
+
+
+-- 得到当前文件夹所在的目录
+function getCurrentScriptFolderPath()
+  local info = debug.getinfo(1, "S")
+  local path = info.source:sub(2) -- 去掉路径前面的 '@' 字符
+  return string.match(path, "(.*/)") or "./"
+end
+
+-- TODO 获取当前 buffer 所在的目录
+-- TODO 将 nvim 的当前工作路径设置为当前 buffer 所在的目录
+
+print(getCurrentScriptFolderPath())
