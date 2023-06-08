@@ -60,6 +60,13 @@ vim.keymap.set("n", "<leader>re", "", {
 
 vim.keymap.set('n', '<leader>mr', MY.reload, {})
 
+-- 在任何模式下按 j k 都是为了离开当前模式.进一步省略按 ESC 的需要
+-- vim.keymap.set('t', 'jk', "<C-\\><C-n>",{}) -- 暂时先放弃,因为加上这个后使用非常卡顿
+vim.keymap.set('c', 'jk', "<ESC>",{})
+
+-- 不要在快速按 qq 的时候直接 recored macro
+vim.keymap.set('n', 'qq', "",opts)
+
 -- 配置 hop
 local hop = require 'hop'
 hop.setup()
@@ -99,3 +106,27 @@ end
 -- TODO 将 nvim 的当前工作路径设置为当前 buffer 所在的目录
 
 print(getCurrentScriptFolderPath())
+
+
+-- 快速切换到父级目录
+-- 或许应该在 tree 中实现
+vim.keymap.set("n","<Leader>eh",":cd ..<CR>",opts)
+
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true,
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = true, -- use a classic bottom cmdline for search
+    command_palette = true, -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- add a border to hover docs and signature help
+  },
+})
