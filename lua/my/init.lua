@@ -108,7 +108,8 @@ end
 print(getCurrentScriptFolderPath())
 
 function openCurBufferDir()
-  local curBufferDir = getCurrentScriptFolderPath()
+  local curBufferDir = vim.fn.expand("%")
+  curBufferDir = string.match(curBufferDir, "(.*/)") or "./"
   local cmd = ":cd " .. curBufferDir
   print(cmd)
   vim.cmd(cmd)
