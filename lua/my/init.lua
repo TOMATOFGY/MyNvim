@@ -107,26 +107,39 @@ end
 
 print(getCurrentScriptFolderPath())
 
+function openCurBufferDir()
+  local curBufferDir = getCurrentScriptFolderPath()
+  local cmd = ":cd " .. curBufferDir
+  print(cmd)
+  vim.cmd(cmd)
+end
+vim.keymap.set("n","<Leader>ec",openCurBufferDir,opts)
 
 -- 快速切换到父级目录
 -- 或许应该在 tree 中实现
 vim.keymap.set("n","<Leader>eh",":cd ..<CR>",opts)
 
-require("noice").setup({
-  lsp = {
+
+-- ⭕️目前遇到了一个问题,首次打开nvim 会报错
+-- 不了解那个 config 是不是全局变量
+---- require("noice").setup({
+  --lsp = {
     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true,
-    },
-  },
-  -- you can enable a preset for easier configuration
-  presets = {
-    bottom_search = true, -- use a classic bottom cmdline for search
-    command_palette = true, -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false, -- add a border to hover docs and signature help
-  },
-})
+    -- override = {
+    --   ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+    --   ["vim.lsp.util.stylize_markdown"] = true,
+    --   ["cmp.entry.get_documentation"] = true,
+    -- },
+    --override = {
+      --["vim.lsp.hover.enable"] = false
+    --}
+  --},
+  ---- you can enable a preset for easier configuration
+  --presets = {
+    --bottom_search = true, -- use a classic bottom cmdline for search
+    --command_palette = true, -- position the cmdline and popupmenu together
+    --long_message_to_split = true, -- long messages will be sent to a split
+    --inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    --lsp_doc_border = false, -- add a border to hover docs and signature help
+  --},
+--})
