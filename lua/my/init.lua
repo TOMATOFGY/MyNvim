@@ -38,11 +38,11 @@ keymap.set("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap.set("x", "K", ":move '<-2<CR>gv-gv", opts)
 
 -- 能够自由地在 terminal 和其他窗口之间切换
-keymap.set("t","<ESC>","<C-\\><C-n>",opts);
+keymap.set("t","<ESC>","<C-\\><C-n><C-\\><C-n>",opts);
 keymap.set("t","<C-k>","<C-\\><C-n><C-w><C-k>",opts);
 keymap.set("t","<C-j>","<C-\\><C-n><C-w><C-j>",opts);
-keymap.set("t","<C-J>","<C-\\><C-n><C-W><C-J>",opts);
-keymap.set("t","<C-J>","<C-\\><C-n><C-W><C-J>",opts);
+keymap.set("t","<C-h>","<C-\\><C-n><C-W><C-h>",opts);
+keymap.set("t","<C-l>","<C-\\><C-n><C-W><C-l>",opts);
 
 -- 覆盖,将 Leader-r 映射到打开 ranger
 vim.keymap.set("n", "<leader>rr", "", {
@@ -106,8 +106,6 @@ end
 
 -- TODO 获取当前 buffer 所在的目录
 -- TODO 将 nvim 的当前工作路径设置为当前 buffer 所在的目录
-
-print(getCurrentScriptFolderPath())
 
 function openCurBufferDir()
   local curBufferDir = vim.fn.expand("%")
