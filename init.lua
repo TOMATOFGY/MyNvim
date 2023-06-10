@@ -14,6 +14,7 @@ end
 
 require("core.utils").load_mappings()
 
+-- 执行一个 shell 命令,并把标准输出的结果返回
 function command(cmd)
   os = require("os")
   io = require("io")
@@ -23,7 +24,7 @@ function command(cmd)
   return tostring(output)
 end
 
-
+-- 得到当前文件在文件系统上的位置
 function getCurrentScriptFolderPath()
   local info = debug.getinfo(1, "S")
   local path = info.source:sub(2) -- 去掉路径前面的 '@' 字符
@@ -35,8 +36,9 @@ repository_path = getCurrentScriptFolderPath()
 
 print(repository_path)
 
--- lazy.vim 所在路径
-lazypath = repository_path .. "lazy/lazy.vim"
+-- lazy.vim 所在路
+-- local lazypath = repository_path .. "lazy/lazy.vim"
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
 -- TODO 将 lazynvim 的下载路径设置为当前 config 所在的路径
 -- bootstrap lazy.nvim!

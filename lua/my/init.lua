@@ -122,6 +122,7 @@ vim.keymap.set("n","<Leader>eh",":cd ..<CR>",opts)
 
 
 -- ⭕️目前遇到了一个问题,首次打开nvim 会报错
+-- ⭕️另一个问题是,不能够在 docker 里面打开,会直接闪退 
 -- 不了解那个 config 是不是全局变量
 ---- require("noice").setup({
   --lsp = {
