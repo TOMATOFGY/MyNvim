@@ -67,7 +67,8 @@ vim.keymap.set('n', '<leader>mr', MY.reload, {})
 vim.keymap.set('c', 'jk', "<ESC>",{})
 
 -- 不要在快速按 qq 的时候直接 recored macro
-vim.keymap.set('n', 'qq', "",opts)
+-- 但是这样设置会在只按一个q的时候导致反应有延迟
+-- vim.keymap.set('n', 'qq', "",opts)
 
 -- 配置 hop
 local hop = require 'hop'

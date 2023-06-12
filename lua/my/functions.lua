@@ -34,7 +34,8 @@ MY = {
 }
 
 MY.reload = function ()
-  local my_config_path = "/Users/tomatofaq/.config/nvim/lua/my/init.lua"
+  local dir = getCurrentScriptFolderPath()
+  local my_config_path = dir .. "/init.lua"
   dofile(my_config_path)
 --  print "RELOAD MY CONFIG!!" 
 end
