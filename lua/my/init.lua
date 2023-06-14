@@ -146,3 +146,22 @@ vim.keymap.set("n","<Leader>eh",":cd ..<CR>",opts)
     --lsp_doc_border = false, -- add a border to hover docs and signature help
   --},
 --})
+--
+--
+
+-- 进行一次过滤
+--[[
+local string = require("string")
+local notify = vim.notify
+vim.notify = function(msg, ...)
+  if string.find(msg,"multiple different client") then
+        return
+    end
+ if string.find(msg,"Noice") then
+        return
+    end
+
+
+    notify(msg, ...)
+end
+]]
