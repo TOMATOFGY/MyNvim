@@ -10,6 +10,8 @@ local keymap = vim.keymap
 local builtin = require('telescope.builtin')
 
 vim.keymap.set('n', '<leader>fu', ":Telescope undo<CR>", {})
+-- 打开 notify 插件中输出过的信息
+vim.keymap.set('n', '<leader>fn', ":Telescope notify<CR>", {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
@@ -165,3 +167,17 @@ vim.notify = function(msg, ...)
     notify(msg, ...)
 end
 ]]
+
+
+
+vim.cmd('set encoding=utf-8')
+vim.cmd('set fileencoding=utf-8')
+
+
+local noice = require("noice")
+
+local notify = require("notify")
+notify("Reloaded customed configure","info",{
+  title = "🍅 RELOAD MY CONFIG",
+  render = 'compact'
+})

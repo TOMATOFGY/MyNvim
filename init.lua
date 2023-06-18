@@ -34,7 +34,7 @@ end
 -- 获取当前配置文件所在路径
 repository_path = getCurrentScriptFolderPath()
 
-print(repository_path)
+-- print(repository_path)
 
 -- lazy.vim 所在路
 -- local lazypath = repository_path .. "lazy/lazy.vim"
