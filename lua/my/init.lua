@@ -2,7 +2,6 @@
 -- 🍅 : 本文件需要支持能重入,这样能方便重新载入
 -- 2023-05-26 18:24:19 TODO tab 上需要显示文件的全路径,不然夸文件夹同名看不出来是哪个文件
 -- 2023-05-26 18:32:28 TODO 获取当前buffer 中显示的文件的路径,打开 NvimTree 的时候可以选择打开当前文件路径还是项目路径还是 nvim 的当前路径
-print "USE FANQIANYI CONFIG"
 local keymap = vim.keymap
 
 -- 对第三方 plugin 进行映射
@@ -97,7 +96,6 @@ vim.cmd("command! WQ wq")
 
 
 local cache_dir = vim.fn.stdpath("cache")
-print (cache_dir)
 
 
 -- 得到当前文件夹所在的目录
@@ -173,11 +171,11 @@ end
 vim.cmd('set encoding=utf-8')
 vim.cmd('set fileencoding=utf-8')
 
-
-local noice = require("noice")
-
 local notify = require("notify")
 notify("Reloaded customed configure","info",{
   title = "🍅 RELOAD MY CONFIG",
   render = 'compact'
 })
+
+local outline = require("symbols-outline").setup()
+vim.keymap.set('n','<leader>es',':SymbolsOutline<Tab><CR>',{})

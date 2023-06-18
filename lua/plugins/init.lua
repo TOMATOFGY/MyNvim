@@ -326,7 +326,11 @@ notify = {
     --   If not available, we use `mini` as the fallback
     "rcarriga/nvim-notify",
     }
-}
+},
+ {
+  'simrat39/symbols-outline.nvim',
+    enabled = true
+  }
 }
 
 local config = require("core.utils").load_config()
