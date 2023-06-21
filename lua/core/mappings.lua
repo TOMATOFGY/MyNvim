@@ -275,8 +275,8 @@ M.telescope = {
     -- pick a hidden term
     ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "pick hidden term" },
 
-    -- theme switcher
-    ["<leader>th"] = { "<cmd> Telescope themes <CR>", "nvchad themes" },
+    -- theme switcher 
+    ["<leader>tt"] = { "<cmd> Telescope themes <CR>", "nvchad themes" },
   },
 }
 
@@ -304,6 +304,14 @@ M.nvterm = {
         require("nvterm.terminal").toggle "vertical"
       end,
       "toggle vertical term",
+    },
+
+
+    ["<C-`>"] = {
+      function()
+        require("nvterm.terminal").toggle "horizontal"
+      end,
+      "horizontal term in vscode style",
     },
   },
 
@@ -333,14 +341,22 @@ M.nvterm = {
     -- new
     ["<leader>h"] = {
       function()
-        require("nvterm.terminal").new "horizontal"
+        require("nvterm.terminal").toggle "horizontal"
       end,
       "new horizontal term",
     },
 
+
+    ["<C-`>"] = {
+      function()
+        require("nvterm.terminal").toggle "horizontal"
+      end,
+      "horizontal term in vscode style",
+    },
+
     ["<leader>v"] = {
       function()
-        require("nvterm.terminal").new "vertical"
+        require("nvterm.terminal").toggle "vertical"
       end,
       "new vertical term",
     },

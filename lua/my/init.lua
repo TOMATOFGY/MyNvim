@@ -26,6 +26,7 @@ require("my.functions")
 vim.keymap.set('n', '<leader>mc', MY.open_config, {})
 vim.keymap.set('n', '<leader>mm',":edit ~/.config/nvim/lua/my/init.lua<CR>" , {})
 vim.keymap.set("n","<Leader>ud",MY.open_today_diary,{ noremap = true, silent = true })
+vim.keymap.set("n","<Leader>um",MY.open_cur_month_diary,{ noremap = true, silent = true })
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 
@@ -167,7 +168,6 @@ end
 ]]
 
 
-
 vim.cmd('set encoding=utf-8')
 vim.cmd('set fileencoding=utf-8')
 
@@ -177,5 +177,20 @@ notify("Reloaded customed configure","info",{
   render = 'compact'
 })
 
-local outline = require("symbols-outline").setup()
-vim.keymap.set('n','<leader>es',':SymbolsOutline<Tab><CR>',{})
+require("symbols-outline").setup()
+vim.keymap.set('n','<leader>es',':SymbolsOutline<CR>',{})
+-- 下面这个命令在已经关闭的时候再关闭一次会输出错误.考虑写一个根据名字关闭窗口的函数
+vim.keymap.set('n','<leader>ds',':SymbolsOutlineClose<CR>',{ silent = true})
+
+
+-- 自定义的 terminal 打开方式
+-- 出现的问题是,退出后不会自动整个退出,会有一个 process exit
+vim.keymap.set('n','<leader>th','<c-w>s:ter<CR>A',{})
+vim.keymap.set('n','<leader>tv','<c-w>v:ter<CR>A',{})
+vim.keymap.set('n','<leader>tf',function()
+        require("nvterm.terminal").toggle "float"
+      end,{})
+
+
+
+
