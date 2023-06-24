@@ -60,7 +60,21 @@ lvim.plugins = {
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
-    }
+    },
+    config = function()
+      require("noice").setup({
+        messages = {
+          -- NOTE: If you enable messages, then the cmdline is enabled automatically.
+          -- This is a current Neovim limitation.
+          enabled = true,        -- enables the Noice messages UI
+          view = "notify",       -- default view for messages
+          view_error = "notify", -- view for errors
+          view_warn = "notify",  -- view for warnings
+          view_history = "messages", -- view for :messages
+          view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+        }
+      })
+    end
   },
   {
     'simrat39/symbols-outline.nvim',
@@ -241,7 +255,7 @@ lvim.keys.normal_mode["<Space>fh"] = ":Telescope help_tags<CR>"
 lvim.keys.normal_mode["<Space>fn"] = ":Telescope notify<CR>"
 
 
-lvim.builtin.which_key.mappings["t"] = {":set wrap","开启 wrap"}
+lvim.builtin.which_key.mappings["t"] = { ":set wrap", "开启 wrap" }
 
 -- 获取当前窗口的名字
 get_current_window_name = function()
@@ -253,28 +267,28 @@ end
 -- 1. 如果是当前窗口是浮动窗口,则关闭浮动窗口
 -- 2. 如果当前窗口名字包含MY.buffer_change_forbidden_list中的字符串(不区分大小写),则不做任何处理
 MY.buffer_change_forbidden_list = {
-    "NvimTree",
-    "NvimTree_1",
-    "Outline",
-    "OUTLINE"
+  "NvimTree",
+  "NvimTree_1",
+  "Outline",
+  "OUTLINE"
 }
-MY.move_to_next_buffer = function ()
-    local current_window_name = get_current_window_name()
-    for i, name in ipairs(MY.buffer_change_forbidden_list) do
-        if string.find(current_window_name, name, 1, true) ~= nil then
-            return
-        end
+MY.move_to_next_buffer = function()
+  local current_window_name = get_current_window_name()
+  for i, name in ipairs(MY.buffer_change_forbidden_list) do
+    if string.find(current_window_name, name, 1, true) ~= nil then
+      return
     end
-    vim.cmd(":bn")
+  end
+  vim.cmd(":bn")
 end
-MY.move_to_prev_buffer = function ()
-    local current_window_name = get_current_window_name()
-    for i, name in ipairs(MY.buffer_change_forbidden_list) do
-        if string.find(current_window_name, name, 1, true) ~= nil then
-            return
-        end
+MY.move_to_prev_buffer = function()
+  local current_window_name = get_current_window_name()
+  for i, name in ipairs(MY.buffer_change_forbidden_list) do
+    if string.find(current_window_name, name, 1, true) ~= nil then
+      return
     end
-    vim.cmd(":bp")
+  end
+  vim.cmd(":bp")
 end
 lvim.keys.normal_mode["<Tab>"] = MY.move_to_next_buffer
 lvim.keys.normal_mode["<S-Tab>"] = MY.move_to_prev_buffer
