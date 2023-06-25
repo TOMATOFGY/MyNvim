@@ -326,3 +326,8 @@ vim.notify("Reloaded customed configure", "info", {
 -- 修改lvim内嵌 terminal 的打开方式
 lvim.builtin.terminal.open_mapping = "<c-`>"
 lvim.builtin.terminal.direction = 'horizontal'
+
+
+-- alias jk as <ESC> in input mode
+lvim.keys.insert_mode["jk"] = "<ESC>"
+
