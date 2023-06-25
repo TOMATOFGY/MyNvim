@@ -255,7 +255,7 @@ lvim.keys.normal_mode["<Space>fh"] = ":Telescope help_tags<CR>"
 lvim.keys.normal_mode["<Space>fn"] = ":Telescope notify<CR>"
 
 
-lvim.builtin.which_key.mappings["t"] = { ":set wrap", "开启 wrap" }
+lvim.builtin.which_key.mappings["t"] = { ":set wrap<CR>", "开启 wrap" }
 
 -- 获取当前窗口的名字
 get_current_window_name = function()
