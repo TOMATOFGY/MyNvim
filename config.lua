@@ -66,11 +66,11 @@ lvim.plugins = {
         messages = {
           -- NOTE: If you enable messages, then the cmdline is enabled automatically.
           -- This is a current Neovim limitation.
-          enabled = true,        -- enables the Noice messages UI
-          view = "notify",       -- default view for messages
-          view_error = "notify", -- view for errors
-          view_warn = "notify",  -- view for warnings
-          view_history = "messages", -- view for :messages
+          enabled = true,              -- enables the Noice messages UI
+          view = "notify",             -- default view for messages
+          view_error = "notify",       -- view for errors
+          view_warn = "notify",        -- view for warnings
+          view_history = "messages",   -- view for :messages
           view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
         }
       })
@@ -107,7 +107,14 @@ lvim.plugins = {
       })
     end,
   },
-
+  --[[
+  {
+  "NvChad/nvterm",
+  config = function ()
+    require("nvterm").setup()
+  end,
+}
+  ]]
 
 }
 
@@ -254,8 +261,25 @@ lvim.keys.normal_mode["<Space>fb"] = ":Telescope buffers<CR>"
 lvim.keys.normal_mode["<Space>fh"] = ":Telescope help_tags<CR>"
 lvim.keys.normal_mode["<Space>fn"] = ":Telescope notify<CR>"
 
+is_line_wrapped = false
+function toggle_line_wrap()
+  if is_line_wrapped then
+    vim.notify("set nowrap", "info", {
+      render = 'compact'
+    })
+    vim.cmd("set nowrap")
+  else
+    vim.notify("line wrapped", "info", {
+      render = 'compact'
+    })
+    vim.cmd("set wrap")
+  end
+  is_line_wrapped = not is_line_wrapped
+end
 
-lvim.builtin.which_key.mappings["t"] = { ":set wrap<CR>", "开启 wrap" }
+-- lvim.builtin.which_key.mappings["t"] = { ":set wrap<CR>", "开启 wrap" }
+lvim.builtin.which_key.mappings["t"] = { toggle_line_wrap, "toggle wrap" }
+
 
 -- 获取当前窗口的名字
 get_current_window_name = function()
@@ -324,10 +348,9 @@ vim.notify("Reloaded customed configure", "info", {
 })
 
 -- 修改lvim内嵌 terminal 的打开方式
-lvim.builtin.terminal.open_mapping = "<c-`>"
+lvim.builtin.terminal.open_mapping = "<c-\\>"
 lvim.builtin.terminal.direction = 'horizontal'
 
 
 -- alias jk as <ESC> in input mode
 lvim.keys.insert_mode["jk"] = "<ESC>"
-
